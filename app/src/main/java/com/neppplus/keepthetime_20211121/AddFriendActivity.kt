@@ -10,7 +10,8 @@ class AddFriendActivity : BaseActivity() {
     lateinit var  binding : ActivityAddFriendBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding =  DataBindingUtil.setContentView(this, R.layout.activity_add_friend)        setupEvents()
+        binding =  DataBindingUtil.setContentView(this, R.layout.activity_add_friend)
+        setupEvents()
         setValues()
     }
 
