@@ -21,6 +21,7 @@ class ViewFriendListActivity : BaseActivity() {
 
     val mMyFriendList = ArrayList<UserData>()
 
+    lateinit var mFriendAdapter: MyFriendAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +38,9 @@ class ViewFriendListActivity : BaseActivity() {
     override fun setValues() {
         getMyFriendFromServer()
 
+        mFriendAdapter = MyFriendAdapter(mContext, R.layout.myfriendlistitem, mMyFriendList)
+        binding.myFriendListView.adapter = mFriendAdapter
+
 
     }
 
@@ -49,6 +53,8 @@ class ViewFriendListActivity : BaseActivity() {
                     val br = response.body()!!
 
                     mMyFriendList.addAll( br.data.friends )
+
+                    mFriendAdapter.notifyDataSetChanged()
 
                     for(friend in br.data.friends){
                         Log.d("친구들이름", friend.nickname)
