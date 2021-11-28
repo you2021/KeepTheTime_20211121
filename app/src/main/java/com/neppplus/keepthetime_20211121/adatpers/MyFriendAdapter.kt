@@ -9,15 +9,16 @@ import com.neppplus.keepthetime_20211121.R
 import com.neppplus.keepthetime_20211121.datas.UserData
 import java.util.ArrayList
 
-class MyFriendsAdapter(
-    val mContext: Context,
-    val resId: Int,
-    val mList: ArrayList<UserData>
-) : ArrayAdapter<UserData>( mContext, resId, mList ) {
+class MyFriendAdapter(
+    val mContext : Context,
+    val redId:Int,
+    val mList :ArrayList<UserData>
+) : ArrayAdapter<UserData>(mContext,redId, mList) {
 
     val mInflater = LayoutInflater.from(mContext)
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+
         var tempRow = convertView
 
         if (tempRow == null) {
