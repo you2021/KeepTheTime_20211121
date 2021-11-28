@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neppplus.keepthetime_20211121.R
 import com.neppplus.keepthetime_20211121.datas.UserData
 
-class SearchedFriendrecyclerAdapter(val mContext: Context, val mList: List<UserData>) : RecyclerView.Adapter<SearchedFriendrecyclerAdapter.SearchedUserViewHolder>() {
+class SearchedFriendRecyclerAdapter(val mContext: Context, val mList: List<UserData>) : RecyclerView.Adapter<SearchedFriendRecyclerAdapter.SearchedUserViewHolder>() {
 
     inner class SearchedUserViewHolder(row: View) : RecyclerView.ViewHolder(row){
 
