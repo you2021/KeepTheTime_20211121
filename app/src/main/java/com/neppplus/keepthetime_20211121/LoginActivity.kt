@@ -62,7 +62,16 @@ class LoginActivity : BaseActivity() {
                         call: Call<BasicResponse>,
                         response: Response<BasicResponse>
                     ) {
+                        if (response.isSuccessful){
+                            val br = response.body()!!
+                            Log.d("앱서버토큰", br.data.token)
+                            ContextUtil.setToken(mContext, br.data.token)
 
+                            val myIntent = Intent(mContext, MainActivity::class.java)
+                            startActivity(myIntent)
+
+                            finish()
+                        }
                     }
 
                     override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
@@ -133,6 +142,9 @@ class LoginActivity : BaseActivity() {
 
                         override fun onCompleted(jsonObj: JSONObject?, response: GraphResponse?) {
 
+                            Log.d("내정보",  jsonObj.toString())
+                            Log.d("내정보응답",  response.toString())
+
                             val uid = jsonObj!!.getString("id")
                             val name = jsonObj.getString("name")
 
@@ -142,6 +154,16 @@ class LoginActivity : BaseActivity() {
                                     call: Call<BasicResponse>,
                                     response: Response<BasicResponse>
                                 ) {
+                                    if (response.isSuccessful) {
+                                        val br = response.body()!!
+                                        Log.d("앱서버토큰", br.data.token)
+                                        ContextUtil.setToken(mContext, br.data.token)
+
+                                        val myIntent = Intent(mContext, MainActivity::class.java)
+                                        startActivity(myIntent)
+
+                                        finish()
+                                    }
 
                                 }
 
@@ -152,8 +174,7 @@ class LoginActivity : BaseActivity() {
 
                             })
 
-                            Log.d("내정보",  jsonObj.toString())
-                            Log.d("내정보응답",  response.toString())
+
                         }
 
                     })
