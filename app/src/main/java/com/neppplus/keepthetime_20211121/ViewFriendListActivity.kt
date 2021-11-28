@@ -1,5 +1,6 @@
 package com.neppplus.keepthetime_20211121
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -31,6 +32,12 @@ class ViewFriendListActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        binding.btnAddFriend.setOnClickListener {
+
+            // 친구 추가 화면 이동
+            val myIntent = Intent(mContext, AddFriendActivity::class.java)
+            startActivity(myIntent)
+        }
     }
 
     override fun setValues() {
