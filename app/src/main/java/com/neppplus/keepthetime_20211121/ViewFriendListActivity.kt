@@ -44,9 +44,9 @@ class ViewFriendListActivity : BaseActivity() {
         getMyFriendFromServer()
 
         mMyFriendsAdapter = MyFriendRecyclerAdapter(mContext, mMyFriendsList)
-        binding.myFriendsRecyclerView.adapter = mMyFriendsAdapter
-        // 여러 형태로 목록 배치 가능. -> 어떤형태로 보여줄건지? 리상이클려뷰에 세팅.
-        binding.myFriendsRecyclerView.layoutManager = LinearLayoutManager(mContext)
+//        binding.myFriendsRecyclerView.adapter = mMyFriendsAdapter
+//        // 여러 형태로 목록 배치 가능. -> 어떤형태로 보여줄건지? 리상이클려뷰에 세팅.
+//        binding.myFriendsRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
 
     }
