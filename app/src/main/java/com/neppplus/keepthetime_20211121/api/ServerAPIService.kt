@@ -50,6 +50,11 @@ interface ServerAPIService {
         @Query("type") type:String,
     ):Call<BasicResponse>
 
+    @GET("/search/user")
+    fun getRequestSearchFriend(
+        @Query("nickname") nickname: String
+    ):Call<BasicResponse>
+
 
 //    연습 - 내 정보 가져오기 API
 
