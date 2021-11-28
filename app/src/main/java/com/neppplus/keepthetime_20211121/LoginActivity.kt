@@ -2,6 +2,7 @@ package com.neppplus.keepthetime_20211121
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.wifi.hotspot2.pps.Credential
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -10,6 +11,8 @@ import androidx.databinding.DataBindingUtil
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.user.UserApiClient
 import com.neppplus.keepthetime_20211121.databinding.ActivityLoginBinding
 import com.neppplus.keepthetime_20211121.datas.BasicResponse
 import com.neppplus.keepthetime_20211121.utils.ContextUtil
@@ -34,11 +37,46 @@ class LoginActivity : BaseActivity() {
         setValues()
     }
 
+    fun getKakaoUserInto(token:OAuthToken){
+        // 실제로 내 정보 요청하는 함수
+
+    }
+
     override fun setupEvents() {
 
         binding.btnKakaoLogin.setOnClickListener {
 
             // 카카오 로그인
+
+            // 카톡 앱이 깔려있는지?
+            if(UserApiClient.instance.isKakaoTalkLoginAvailable( mContext )){
+
+            // 카톡 앱 설치 됨 => 카카오 로그인
+            UserApiClient.instance.loginWithKakaoAccount(mContext){ token, error ->
+                // token : 로그인한 사용자의 고유 카톡 토큰값 => 본인 정보 요청
+                if (error != null){
+                    Toast.makeText(mContext, "카톡 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                    return@loginWithKakaoAccount
+                }
+
+                getKakaoUserInto(token!!)
+            }
+
+            }else{
+
+                // 카톡 앱 미설치 => 카카오계정으로 로그인
+
+                UserApiClient.instance.loginWithKakaoAccount(mContext){token, error ->
+                    if (error != null){
+                        Toast.makeText(mContext, "카톡 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                        return@loginWithKakaoAccount
+                    }
+
+                    getKakaoUserInto(token!!)
+
+                }
+
+            }
 
 
         }
