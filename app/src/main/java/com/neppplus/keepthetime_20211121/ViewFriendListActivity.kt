@@ -7,6 +7,8 @@ import com.neppplus.keepthetime_20211121.databinding.ActivityViewFriendListBindi
 
 class ViewFriendListActivity : BaseActivity() {
 
+
+
     lateinit var binding: ActivityViewFriendListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +23,10 @@ class ViewFriendListActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+    }
+
+    fun getMyFriendFromServer(){
 
     }
 }
