@@ -2,7 +2,7 @@ package com.neppplus.keepthetime_20211121.utils
 
 import com.neppplus.keepthetime_20211121.datas.UserData
 
-class GlobalDaata {
+class GlobalData {
 
     companion object{
 

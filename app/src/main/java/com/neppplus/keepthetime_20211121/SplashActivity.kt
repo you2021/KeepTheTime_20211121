@@ -1,14 +1,11 @@
 package com.neppplus.keepthetime_20211121
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import com.neppplus.keepthetime_20211121.datas.BasicResponse
-import com.neppplus.keepthetime_20211121.utils.ContextUtil
-import com.neppplus.keepthetime_20211121.utils.GlobalDaata
+import com.neppplus.keepthetime_20211121.utils.GlobalData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +31,7 @@ class SplashActivity : BaseActivity() {
 
             // 자동로그인 할 상황인지 검사 => 내가 갖고 있는 토큰이, 유혀한 토큰인가?
             // 내 정보 API 통해서 -> 사용자 정보가 저장되었는가?
-            if (GlobalDaata.loginUser == null){
+            if (GlobalData.loginUser == null){
                 // 토큰 없거나 or 있지만 유효하지 않으면 => 로그인
                 myIntent = Intent(mContext, LoginActivity::class.java)
 
@@ -62,7 +59,7 @@ class SplashActivity : BaseActivity() {
                     val br = response.body()!!
 
                    // GlobalData의 로그인사용자에 사용자 정보
-                    GlobalDaata.loginUser = br.data.user
+                    GlobalData.loginUser = br.data.user
                 }else{
                     // 내 정보 불러오기 실패
                 }
