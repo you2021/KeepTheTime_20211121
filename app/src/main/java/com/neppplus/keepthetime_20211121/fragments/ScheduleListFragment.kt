@@ -21,7 +21,7 @@ class ScheduleListFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflater(inflater, R.layout.fragment_schedule_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_schedule_list, container, false)
         return binding.root
     }
 

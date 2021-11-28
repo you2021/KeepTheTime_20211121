@@ -29,7 +29,7 @@
             android:id="@+id/edtDateTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="일시 - yyy-MM-dd HH:mm"
+            android:hint="일시 - yyyy-MM-dd HH:mm"
             android:singleLine="true"/>
 
         <TextView
@@ -54,14 +54,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="위도값 - 37.123456 emd"
-            android:inputType="number"/>
+            android:inputType="numberDecimal"/>
 
         <EditText
             android:id="@+id/edtLongitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="위도값 - 127.56781234 emd"
-            android:inputType="number"/>
+            android:hint="경도값 - 127.56781234 emd"
+            android:inputType="numberDecimal"/>
 
         <Button
             android:id="@+id/btnOk"
