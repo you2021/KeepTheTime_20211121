@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KeepTheTime_20211121">
         <activity
+            android:name=".EditAppintmentActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddFriendActivity"
             android:exported="false" />
         <activity
@@ -36,7 +39,7 @@
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
