@@ -14,14 +14,11 @@ import retrofit2.Response
 
 class ViewFriendListActivity : BaseActivity() {
 
-
-
-
     lateinit var binding: ActivityViewFriendListBinding
 
-    val mMyFriendList = ArrayList<UserData>()
-
-    lateinit var mFriendAdapter: MyFriendAdapter
+//    val mMyFriendList = ArrayList<UserData>()
+//
+//    lateinit var mFriendAdapter: MyFriendAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,39 +35,39 @@ class ViewFriendListActivity : BaseActivity() {
     override fun setValues() {
         getMyFriendFromServer()
 
-        mFriendAdapter = MyFriendAdapter(mContext, R.layout.myfriendlistitem, mMyFriendList)
-        binding.myFriendListView.adapter = mFriendAdapter
+//        mFriendAdapter = MyFriendAdapter(mContext, R.layout.myfriendlistitem, mMyFriendList)
+//        binding.myFriendListView.adapter = mFriendAdapter
 
 
     }
 
     fun getMyFriendFromServer() {
-        apiService.getRequestMyFriends("my").enqueue(object : Callback<BasicResponse> {
-            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
-
-                if (response.isSuccessful) {
-
-                    val br = response.body()!!
-
-                    mMyFriendList.addAll( br.data.friends )
-
-                    mFriendAdapter.notifyDataSetChanged()
-
-                    for(friend in br.data.friends){
-                        Log.d("친구들이름", friend.nickname)
-
-                    }
-
-
-
-                }
-
-
-            }
-
-            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-            }
-
-        })
+//        apiService.getRequestMyFriends("my").enqueue(object : Callback<BasicResponse> {
+//            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+//
+//                if (response.isSuccessful) {
+//
+//                    val br = response.body()!!
+//
+//                    mMyFriendList.addAll( br.data.friends )
+//
+//                    mFriendAdapter.notifyDataSetChanged()
+//
+//                    for(friend in br.data.friends){
+//                        Log.d("친구들이름", friend.nickname)
+//
+//                    }
+//
+//
+//
+//                }
+//
+//
+//            }
+//
+//            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+//            }
+//
+//        })
     }
 }
