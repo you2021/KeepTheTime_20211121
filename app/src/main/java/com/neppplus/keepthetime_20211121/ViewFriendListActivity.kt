@@ -11,15 +11,13 @@ import com.neppplus.keepthetime_20211121.datas.UserData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.ArrayList
 
 class ViewFriendListActivity : BaseActivity() {
 
     lateinit var binding: ActivityViewFriendListBinding
 
-//    val mMyFriendList = ArrayList<UserData>()
-//
-//    lateinit var mFriendAdapter: MyFriendAdapter
-
+    val mMyFriendsList = ArrayList<UserData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,32 +40,20 @@ class ViewFriendListActivity : BaseActivity() {
     }
 
     fun getMyFriendFromServer() {
-//        apiService.getRequestMyFriends("my").enqueue(object : Callback<BasicResponse> {
-//            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
-//
-//                if (response.isSuccessful) {
-//
-//                    val br = response.body()!!
-//
-//                    mMyFriendList.addAll( br.data.friends )
-//
-//                    mFriendAdapter.notifyDataSetChanged()
-//
-//                    for(friend in br.data.friends){
-//                        Log.d("친구들이름", friend.nickname)
-//
-//                    }
-//
-//
-//
-//                }
-//
-//
-//            }
-//
-//            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-//            }
-//
-//        })
+        apiService.getRequestMyFriends("my").enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                if(response.isSuccessful){
+
+                    val br = response.body()!!
+                    mMyFriendsList.addAll(br.data.friends)
+
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+
+        })
     }
 }
