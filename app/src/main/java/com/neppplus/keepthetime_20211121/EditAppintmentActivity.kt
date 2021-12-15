@@ -23,11 +23,11 @@ class EditAppintmentActivity : BaseActivity() {
 
     val mSelectedDateTime = Calendar.getInstance() // 기본값 : 현재 일시
 
-    lateinit var binding : ActivityEditAppintmentBinding
+    lateinit var binding: ActivityEditAppintmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_appintment,)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_appintment)
         setupEvents()
         setValues()
     }
@@ -39,7 +39,7 @@ class EditAppintmentActivity : BaseActivity() {
             // 시간 선택 팝업(TimePickerDialog) 사용 예시
 
             // 1. 선택 완료시 할일 (OnTimeSetListener) 설정 -=> 변수에 담아두자.
-            val timeSetListener = object : TimePickerDialog.OnTimeSetListener{
+            val timeSetListener = object : TimePickerDialog.OnTimeSetListener {
                 override fun onTimeSet(p0: TimePicker?, hourOfDay: Int, minute: Int) {
 
 //                    Log.d("선택된시간", "${hourOfDay}시, ${minute}분")
@@ -78,7 +78,7 @@ class EditAppintmentActivity : BaseActivity() {
 
             // 선택 완료시 할일 설정(JAVA - Interface) => 변수에 담아두자
 
-            val dateSetListener = object  : DatePickerDialog.OnDateSetListener{
+            val dateSetListener = object : DatePickerDialog.OnDateSetListener {
                 override fun onDateSet(p0: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
 
                     // 실제로 날짜가 선택되면 할일 적는 공간
@@ -113,7 +113,6 @@ class EditAppintmentActivity : BaseActivity() {
 //                    binding.txtDate.text = dateStr
 
 
-
                 }
 
             }
@@ -128,9 +127,9 @@ class EditAppintmentActivity : BaseActivity() {
             val datePickDialog = DatePickerDialog(
                 mContext,
                 dateSetListener,
-                mSelectedDateTime.get( Calendar.YEAR ),
-                mSelectedDateTime.get( Calendar.MONTH ),
-                mSelectedDateTime.get( Calendar.DAY_OF_MONTH )
+                mSelectedDateTime.get(Calendar.YEAR),
+                mSelectedDateTime.get(Calendar.MONTH),
+                mSelectedDateTime.get(Calendar.DAY_OF_MONTH)
             )
 
 
@@ -144,7 +143,7 @@ class EditAppintmentActivity : BaseActivity() {
             // 입력갑 검증 (vaildation)
 
             // 1. 일자/ 시간을 모두 선택했는지?
-            if (binding.txtDate.text == "날짜 선택" || binding.txtTime.text == "시간 선택"){
+            if (binding.txtDate.text == "날짜 선택" || binding.txtTime.text == "시간 선택") {
                 // 둘중 하나를 아직 입력하지 않는 상황.
                 Toast.makeText(mContext, "약속 일시를 모두 선택해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -158,7 +157,7 @@ class EditAppintmentActivity : BaseActivity() {
             val now = Calendar.getInstance() // 현재 시간 (클릭된 시간)을 기록
 
             // 두개의 시간을 양으로 변환해서 대소비교
-            if (mSelectedDateTime.timeInMillis < now.timeInMillis){
+            if (mSelectedDateTime.timeInMillis < now.timeInMillis) {
                 // 약속시간이, 현재시간보다 덜 시간이 흐른 상태. (더 이전 시간)
 
                 // 약속시간은 지금보다 미래여야 의미가 있다.
@@ -179,8 +178,14 @@ class EditAppintmentActivity : BaseActivity() {
 //            val inputLat = binding.edtLatitude.text.toString().toDouble()
 //            val inputLng = binding.edtLongitude.text.toString().toDouble()
 
-            apiService.postRequestAppointment(inputTitle,finalDateTimeStr,inputPlace,37.123,127.123)
-                .enqueue(object : Callback<BasicResponse>{
+            apiService.postRequestAppointment(
+                inputTitle,
+                finalDateTimeStr,
+                inputPlace,
+                37.123,
+                127.123
+            )
+                .enqueue(object : Callback<BasicResponse> {
                     override fun onResponse(
                         call: Call<BasicResponse>,
                         response: Response<BasicResponse>
@@ -199,4 +204,41 @@ class EditAppintmentActivity : BaseActivity() {
     override fun setValues() {
 
     }
+
+    override fun onStart() {
+        super.onStart()
+        binding.naverMap.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.naverMap.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.naverMap.onPause()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        binding.naverMap.onSaveInstanceState(outState)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.naverMap.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.naverMap.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        binding.naverMap.onLowMemory()
+    }
+
+
 }
