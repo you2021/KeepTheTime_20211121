@@ -9,6 +9,8 @@ import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraUpdate
 import com.neppplus.keepthetime_20211121.databinding.ActivityEditAppintmentBinding
 import com.neppplus.keepthetime_20211121.datas.BasicResponse
 import retrofit2.Call
@@ -208,6 +210,11 @@ class EditAppintmentActivity : BaseActivity() {
             // 로딩이 끝난 네이버멥 객체(인스턴스가) => it 변수에 담겨 있다.
             val naverMap = it
 
+            // 예시. 카메라를 본인 집근처로 이동
+
+            // 위경도 정보 => 카메라 이동 명령을 변수에 저장만.
+            val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.4944825843259, 126.84419596180862))
+            naverMap.moveCamera(cameraUpdate)
 
         }
 
