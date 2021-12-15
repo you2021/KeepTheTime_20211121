@@ -40,7 +40,15 @@ class EditAppintmentActivity : BaseActivity() {
 
                     // 실제로 날짜가 선택되면 할일 적는 공간
 
-                    Log.d("선택한년월일","${year}년 ${month}월 ${dayOfMonth}일 선택됨")
+//                    Log.d("선택한년월일","${year}년 ${month}월 ${dayOfMonth}일 선택됨")
+
+                    // 선택된 일시를 저장할 변수에, 연/월/일을 저장
+//                    mSelectedDateTime.set(Calendar.YEAR, year)
+//                    mSelectedDateTime.set(Calendar.MONTH, month)
+//                    mSelectedDateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+                    // 년/ 월/일을 한번에 저장하는 set 함수 활용
+                    mSelectedDateTime.set(year, month, dayOfMonth)
 
                 }
 
@@ -51,6 +59,7 @@ class EditAppintmentActivity : BaseActivity() {
             // Kotlin : JAVA 기반 언어 => 월 : 0 ~ 11로 만들어져 있음.
 
             // 오늘 날짜를 기본으로 띄우도록. => mSelectedDateTime에 저장된 값 활용
+            // 선택한 이후로는 => 이전에 선택한 날짜가 뜨도록
 
             val datePickDialog = DatePickerDialog(
                 mContext,
@@ -59,6 +68,8 @@ class EditAppintmentActivity : BaseActivity() {
                 mSelectedDateTime.get( Calendar.MONTH ),
                 mSelectedDateTime.get( Calendar.DAY_OF_MONTH )
             )
+
+
 
             datePickDialog.show()
 
