@@ -1,10 +1,12 @@
 package com.neppplus.keepthetime_20211121
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.DatePicker
+import android.widget.TimePicker
 import androidx.databinding.DataBindingUtil
 import com.neppplus.keepthetime_20211121.databinding.ActivityEditAppintmentBinding
 import com.neppplus.keepthetime_20211121.datas.BasicResponse
@@ -30,6 +32,33 @@ class EditAppintmentActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        binding.txtTime.setOnClickListener {
+
+            // 시간 선택 팝업(TimePickerDialog) 사용 예시
+
+            // 1. 선택 완료시 할일 (OnTimeSetListener) 설정 -=> 변수에 담아두자.
+            val timeSetListener = object : TimePickerDialog.OnTimeSetListener{
+                override fun onTimeSet(p0: TimePicker?, hourOfDay: Int, minute: Int) {
+
+                    Log.d("선택된시간", "${hourOfDay}시, ${minute}분")
+
+                }
+
+            }
+            // 2. 시간 선택 팝업 출현
+
+            val timePicker = TimePickerDialog(
+                mContext,
+                timeSetListener,
+                15,
+                30,
+                false
+            )
+
+            timePicker.show()
+
+        }
 
         binding.txtDate.setOnClickListener {
             // 날짜 선택 팝업 (DatePickerDialog) 사용 예시
