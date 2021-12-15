@@ -141,11 +141,16 @@ class EditAppintmentActivity : BaseActivity() {
         binding.btnOk.setOnClickListener {
             val inputTitle = binding.edtTitle.text.toString()
 //            val inputDateTime = binding.edtDateTime.text.toString()
+            // mSelectedDateTime에 저장된 약속일시를 -> String으로 가공(SimpleDateFormat) => 서버에 첨부
+
+            val serverFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
+            val finalDateTimeStr = serverFormat.format(mSelectedDateTime.time)
+
             val inputPlace = binding.edtPlace.text.toString()
             val inputLat = binding.edtLatitude.text.toString().toDouble()
             val inputLng = binding.edtLongitude.text.toString().toDouble()
 
-            apiService.postRequestAppointment(inputTitle,"임시 값",inputPlace,inputLat,inputLng)
+            apiService.postRequestAppointment(inputTitle,finalDateTimeStr,inputPlace,inputLat,inputLng)
                 .enqueue(object : Callback<BasicResponse>{
                     override fun onResponse(
                         call: Call<BasicResponse>,
