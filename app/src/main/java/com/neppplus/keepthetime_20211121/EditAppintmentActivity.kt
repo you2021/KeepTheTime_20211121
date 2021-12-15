@@ -203,6 +203,14 @@ class EditAppintmentActivity : BaseActivity() {
 
     override fun setValues() {
 
+        binding.naverMap.getMapAsync {
+
+            // 로딩이 끝난 네이버멥 객체(인스턴스가) => it 변수에 담겨 있다.
+            val naverMap = it
+
+
+        }
+
     }
 
     override fun onStart() {
