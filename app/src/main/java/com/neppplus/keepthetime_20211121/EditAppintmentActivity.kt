@@ -214,25 +214,38 @@ class EditAppintmentActivity : BaseActivity() {
             // 로딩이 끝난 네이버멥 객체(인스턴스가) => it 변수에 담겨 있다.
             val naverMap = it
 
-            // 예시. 카메라를 본인 집근처로 이동
+            // 기능 : 지도를 클릭하면 -> 클릭된 지점에 마커 찍기(커스텀 마커 예시)
+            naverMap.setOnMapClickListener { pointF, latLng ->
+                // 클릭된 좌표 latLng -> 카메라 이동(정가운데) / 마커 찍기
 
-            // 위경도 정보 => 카메라 이동 명령을 변수에 저장만.
+                val cameraUpdate = CameraUpdate.scrollTo(latLng)
+                naverMap.moveCamera(cameraUpdate)
 
-            val latLog =LatLng(37.4944825843259, 126.84419596180862)
-            val cameraUpdate = CameraUpdate.scrollTo(latLog)
-            naverMap.moveCamera(cameraUpdate)
-
-            // 마커를 본인 집근처 띄어보기
-            val marker = Marker()
-            marker.position = latLog
-            marker.map = naverMap
-
-            marker.icon = OverlayImage.fromResource(R.drawable.ic_pin)
-
-            // 네이버 지도 클릭 이벤트 달아보기
-            naverMap.setOnMapClickListener{point,  latLog ->
-                Toast.makeText(mContext, "위도 : ${latLog.latitude}, 경도 : ${latLog.longitude}", Toast.LENGTH_SHORT).show()
+                val marker = Marker()
+                marker.position = latLng
+                marker.map = naverMap
             }
+
+
+//            // 예시. 카메라를 본인 집근처로 이동
+//
+//            // 위경도 정보 => 카메라 이동 명령을 변수에 저장만.
+//
+//            val latLog =LatLng(37.4944825843259, 126.84419596180862)
+//            val cameraUpdate = CameraUpdate.scrollTo(latLog)
+//            naverMap.moveCamera(cameraUpdate)
+//
+//            // 마커를 본인 집근처 띄어보기
+//            val marker = Marker()
+//            marker.position = latLog
+//            marker.map = naverMap
+//
+//            marker.icon = OverlayImage.fromResource(R.drawable.ic_pin)
+//
+//            // 네이버 지도 클릭 이벤트 달아보기
+//            naverMap.setOnMapClickListener{point,  latLog ->
+//                Toast.makeText(mContext, "위도 : ${latLog.latitude}, 경도 : ${latLog.longitude}", Toast.LENGTH_SHORT).show()
+//            }
 
         }
 
