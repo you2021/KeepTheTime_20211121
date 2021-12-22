@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.neppplus.keepthetime_20211121.BaseActivity
 import com.neppplus.keepthetime_20211121.EditAppintmentActivity
 import com.neppplus.keepthetime_20211121.R
+import com.neppplus.keepthetime_20211121.adatpers.ScheduleAdapter
 import com.neppplus.keepthetime_20211121.databinding.FragmentScheduleListBinding
 import com.neppplus.keepthetime_20211121.datas.BasicResponse
 import com.neppplus.keepthetime_20211121.datas.ScheduleDate
@@ -22,6 +25,7 @@ class ScheduleListFragment : BaseFragment() {
 
     lateinit var  binding: FragmentScheduleListBinding
     val mScheduleList = ArrayList<ScheduleDate>()
+    lateinit var mSheduleAdapter:ScheduleAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,6 +54,10 @@ class ScheduleListFragment : BaseFragment() {
 
     override fun setValues() {
         getScheduleListFromServer()
+
+        mSheduleAdapter = ScheduleAdapter(mContext, mScheduleList)
+        binding.appointmentRecyclerView.adapter = mSheduleAdapter
+        binding.appointmentRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }
 
     fun getScheduleListFromServer(){
@@ -60,6 +68,8 @@ class ScheduleListFragment : BaseFragment() {
 
                     mScheduleList.clear()
                     mScheduleList.addAll(br.data.appointments)
+
+                    mSheduleAdapter.notifyDataSetChanged()
 
                 }
             }
