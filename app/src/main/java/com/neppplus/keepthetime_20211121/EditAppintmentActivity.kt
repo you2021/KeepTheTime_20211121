@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.neppplus.keepthetime_20211121.databinding.ActivityEditAppintmentBinding
 import com.neppplus.keepthetime_20211121.datas.BasicResponse
 import retrofit2.Call
@@ -115,6 +117,8 @@ class EditAppintmentActivity : BaseActivity() {
 //                    binding.txtDate.text = dateStr
 
 
+                    // txtDate의 문구를 -> 2021-08-05 와 같은 양식으로 가공해서 텍스트 세팅
+
                 }
 
             }
@@ -204,7 +208,7 @@ class EditAppintmentActivity : BaseActivity() {
     }
 
     override fun setValues() {
-
+        
         binding.naverMap.getMapAsync {
 
             // 로딩이 끝난 네이버멥 객체(인스턴스가) => it 변수에 담겨 있다.
@@ -213,8 +217,17 @@ class EditAppintmentActivity : BaseActivity() {
             // 예시. 카메라를 본인 집근처로 이동
 
             // 위경도 정보 => 카메라 이동 명령을 변수에 저장만.
-            val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.4944825843259, 126.84419596180862))
+
+            val latLog =LatLng(37.4944825843259, 126.84419596180862)
+            val cameraUpdate = CameraUpdate.scrollTo(latLog)
             naverMap.moveCamera(cameraUpdate)
+
+            // 마커를 본인 집근처 띄어보기
+            val marker = Marker()
+            marker.position = latLog
+            marker.map = naverMap
+
+            marker.icon = OverlayImage.fromResource(R.drawable.ic_pin)
 
         }
 
