@@ -23,6 +23,7 @@ class ScheduleAdapter(val mContext: Context, val mList:List<ScheduleDate> ) : Re
 
             txtAppointmentTitle.text = data.title
             txtAppointmentPlace.text = data.place
+//            txtDateTime.text = data.datetime
 
         }
 
