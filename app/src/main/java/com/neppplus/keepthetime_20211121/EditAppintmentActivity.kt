@@ -229,6 +229,11 @@ class EditAppintmentActivity : BaseActivity() {
 
             marker.icon = OverlayImage.fromResource(R.drawable.ic_pin)
 
+            // 네이버 지도 클릭 이벤트 달아보기
+            naverMap.setOnMapClickListener{point,  latLog ->
+                Toast.makeText(mContext, "위도 : ${latLog.latitude}, 경도 : ${latLog.longitude}", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }
