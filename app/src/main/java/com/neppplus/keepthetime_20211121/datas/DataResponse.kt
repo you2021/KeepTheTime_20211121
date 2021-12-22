@@ -7,6 +7,9 @@ class DataResponse(
     // 친구 목록 API의 파싱에만 사용용
     var friends : List<UserData>,
 
-    val users : List<UserData>
+    val users : List<UserData>,
+
+    // 약속 목록 API 파싱에서 활용.
+    var appointments : List<ScheduleDate>
 ){
 }
