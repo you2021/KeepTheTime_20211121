@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.neppplus.keepthetime_20211121.R
 import com.neppplus.keepthetime_20211121.datas.ScheduleDate
@@ -11,6 +13,18 @@ import com.neppplus.keepthetime_20211121.datas.ScheduleDate
 class ScheduleAdapter(val mContext: Context, val mList:List<ScheduleDate> ) : RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder>() {
 
     inner class ScheduleViewHolder(row: View) : RecyclerView.ViewHolder(row){
+
+        val txtAppointmentTitle = row.findViewById<TextView>(R.id.txtAppointmentTitle)
+        val txtAppointmentPlace = row.findViewById<TextView>(R.id.txtAppointmentPlace)
+        val txtDateTime = row.findViewById<TextView>(R.id.txtDateTime)
+        val imgMap = row.findViewById<ImageView>(R.id.imgMap)
+
+        fun bind( data : ScheduleDate ){
+
+            txtAppointmentTitle.text = data.title
+            txtAppointmentPlace.text = data.place
+
+        }
 
     }
 
@@ -22,6 +36,9 @@ class ScheduleAdapter(val mContext: Context, val mList:List<ScheduleDate> ) : Re
     }
 
     override fun onBindViewHolder(holder: ScheduleViewHolder, position: Int) {
+
+        holder.bind( mList[position] )
+
     }
 
     override fun getItemCount() = mList.size
