@@ -179,6 +179,12 @@ class EditAppintmentActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
+            // 약속 장소 추가 검증
+            if (mSelectedLatLng == null){
+                Toast.makeText(mContext, "약속 장소를 지도에서 선택해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val inputTitle = binding.edtTitle.text.toString()
 //            val inputDateTime = binding.edtDateTime.text.toString()
             // mSelectedDateTime에 저장된 약속일시를 -> String으로 가공(SimpleDateFormat) => 서버에 첨부
@@ -194,8 +200,8 @@ class EditAppintmentActivity : BaseActivity() {
                 inputTitle,
                 finalDateTimeStr,
                 inputPlace,
-                37.123,
-                127.123
+                mSelectedLatLng!!.latitude,
+                mSelectedLatLng!!.longitude
             )
                 .enqueue(object : Callback<BasicResponse> {
                     override fun onResponse(
