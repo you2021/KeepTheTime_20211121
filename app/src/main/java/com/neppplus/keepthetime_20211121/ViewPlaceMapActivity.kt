@@ -65,6 +65,27 @@ class ViewPlaceMapActivity : BaseActivity() {
 
             infoWindow.open(marker)
 
+            naverMap.setOnMapClickListener { pointF, latLng ->
+
+                // 지도 아무데나 클릭하면, 정보창 닫기
+                infoWindow.close()
+
+            }
+
+            marker.setOnClickListener {
+
+                if(marker.infoWindow == null){
+
+                    // 정보창이 안열려 있는 상태
+                    infoWindow.open(marker)
+                }else{
+                    // 이미 정보창이 열림 상태 => 닫아주자
+                    infoWindow.close()
+                }
+
+                return@setOnClickListener true
+            }
+
         }
 
 
