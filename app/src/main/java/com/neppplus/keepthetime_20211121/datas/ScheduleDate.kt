@@ -1,6 +1,7 @@
 package com.neppplus.keepthetime_20211121.datas
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,7 +16,7 @@ class ScheduleDate(
     @SerializedName("created_at")
     var createdAt:Date
 
-) {
+) : Serializable{
 
     // datetime (약속일시) : Date로 저장되어있다.
     // 기능추가 -> Date => 가공된 String으로 내보내주기 함수.

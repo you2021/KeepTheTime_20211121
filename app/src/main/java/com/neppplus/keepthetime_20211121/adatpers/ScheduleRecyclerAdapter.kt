@@ -31,6 +31,7 @@ class ScheduleRecyclerAdapter(val mContext: Context, val mList:List<ScheduleDate
                 val myIntent = Intent(mContext, ViewPlaceMapActivity::class.java)
 
                 // 어떤 약속을 보러 가는지 데이터 첨부
+                myIntent.putExtra("schedule", data)
 
                mContext.startActivity(myIntent)
             }
