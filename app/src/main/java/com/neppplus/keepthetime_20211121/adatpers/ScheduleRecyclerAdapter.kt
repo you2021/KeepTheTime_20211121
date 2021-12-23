@@ -1,6 +1,7 @@
 package com.neppplus.keepthetime_20211121.adatpers
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.neppplus.keepthetime_20211121.R
+import com.neppplus.keepthetime_20211121.ViewPlaceMapActivity
 import com.neppplus.keepthetime_20211121.datas.ScheduleDate
 
-class ScheduleAdapter(val mContext: Context, val mList:List<ScheduleDate> ) : RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder>() {
+class ScheduleRecyclerAdapter(val mContext: Context, val mList:List<ScheduleDate> ) : RecyclerView.Adapter<ScheduleRecyclerAdapter.ScheduleViewHolder>() {
 
     inner class ScheduleViewHolder(row: View) : RecyclerView.ViewHolder(row){
 
@@ -24,6 +26,11 @@ class ScheduleAdapter(val mContext: Context, val mList:List<ScheduleDate> ) : Re
             txtAppointmentTitle.text = data.title
             txtAppointmentPlace.text = data.place
             txtDateTime.text = data.getFormattedDatetime()
+
+            imgMap.setOnClickListener {
+                val myIntent = Intent(mContext, ViewPlaceMapActivity::class.java)
+                mContext.startActivity(myIntent)
+            }
 
         }
 
