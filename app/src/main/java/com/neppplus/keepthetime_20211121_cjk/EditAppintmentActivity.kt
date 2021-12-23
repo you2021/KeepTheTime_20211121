@@ -3,6 +3,7 @@ package com.neppplus.keepthetime_20211121_cjk
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
@@ -13,7 +14,10 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
 import com.neppplus.keepthetime_20211121_cjk.databinding.ActivityEditAppintmentBinding
 import com.neppplus.keepthetime_20211121_cjk.datas.BasicResponse
+import com.odsay.odsayandroidsdk.API
+import com.odsay.odsayandroidsdk.ODsayData
 import com.odsay.odsayandroidsdk.ODsayService
+import com.odsay.odsayandroidsdk.OnResultCallbackListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -251,6 +255,31 @@ class EditAppintmentActivity : BaseActivity() {
                 // 하나의 지점(본인집-startingPaint)에서 -> 클릭한 지점(latlng)까지 선 긋기
 
                 val startingPoint = LatLng(37.49475257520079, 126.8448165273176)
+
+                // 추랄지 ~ 도착지까지의 대중교통 정거장 목록을 위경도 추출
+                // ODsay 라이브러리 설치 => API 활용.
+                val myODsayService = ODsayService.init(mContext, resources.getString(R.string.odsay_key))
+                myODsayService.requestSearchPubTransPath(
+                    startingPoint.longitude.toString(),
+                    startingPoint.latitude.toString(),
+                    latLng.longitude.toString(),
+                    latLng.latitude.toString(),
+                    null,
+                    null,
+                    null,
+                    object  : OnResultCallbackListener{
+                        override fun onSuccess(p0: ODsayData?, p1: API?) {
+                            val jsonObj = p0!!.json
+                            Log.d("길찾기응답", jsonObj.toString())
+                        }
+
+                        override fun onError(p0: Int, p1: String?, p2: API?) {
+
+                        }
+
+                    }
+                )
+
 
                 // 선이 그어질 경로 (여러 지점의 연결로 표현)
 
