@@ -13,6 +13,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
 import com.neppplus.keepthetime_20211121_cjk.databinding.ActivityEditAppintmentBinding
 import com.neppplus.keepthetime_20211121_cjk.datas.BasicResponse
+import com.odsay.odsayandroidsdk.ODsayService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -264,6 +265,7 @@ class EditAppintmentActivity : BaseActivity() {
                 mPath!!.coords = arrayListOf(
                     startingPoint,
                     LatLng(37.494,126.844),
+
                     latLng
                 )
 
