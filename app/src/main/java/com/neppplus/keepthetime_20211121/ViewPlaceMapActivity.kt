@@ -55,10 +55,11 @@ class ViewPlaceMapActivity : BaseActivity() {
             marker.map = naverMap
 
             // 추가기능 체험 - 정보장(말풍선) => 마커에 반영
+
             val infoWindow = InfoWindow()
             infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(mContext){
                 override fun getText(p0: InfoWindow): CharSequence {
-                    return "테스크 문구"
+                    return mScheduleDate.place
                 }
 
             }

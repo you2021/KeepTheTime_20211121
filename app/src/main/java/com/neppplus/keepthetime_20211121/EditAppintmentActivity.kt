@@ -13,6 +13,7 @@ import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
+import com.naver.maps.map.overlay.PathOverlay
 import com.neppplus.keepthetime_20211121.databinding.ActivityEditAppintmentBinding
 import com.neppplus.keepthetime_20211121.datas.BasicResponse
 import retrofit2.Call
@@ -247,11 +248,28 @@ class EditAppintmentActivity : BaseActivity() {
                 mSelectedMarker!!.position = latLng
                 mSelectedMarker!!.map = naverMap
 
+                // 하나의 지점(본인집-startingPaint)에서 -> 클릭한 지점(latlng)까지 선 긋기
+
+                val startingPoint = LatLng(37.49475257520079, 126.8448165273176)
+
+                // 선이 그어질 경로 (여러 지점의 연결로 표현)
+                val path = PathOverlay()
+                path.coords = arrayListOf(
+                    startingPoint,
+                    latLng
+                )
+
+                path.map = naverMap
+
+
+
 //                val marker = Marker()  // 클릭될때 마다, 새로운 마커가 생성됨.
 //                // 멤버변수로 하나의 마커만 만들고  => 클릭되면 그 마커의 위치만 변
 //                marker.position = latLng
 //                marker.map = naverMap
             }
+
+
 
 
 //            // 예시. 카메라를 본인 집근처로 이동
