@@ -34,6 +34,8 @@ class EditAppintmentActivity : BaseActivity() {
     var mSelectedLatLng : LatLng? = null
     var mSelectedMarker : Marker? = null
 
+    var mPath: PathOverlay? = null
+
     lateinit var binding: ActivityEditAppintmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -253,13 +255,21 @@ class EditAppintmentActivity : BaseActivity() {
                 val startingPoint = LatLng(37.49475257520079, 126.8448165273176)
 
                 // 선이 그어질 경로 (여러 지점의 연결로 표현)
-                val path = PathOverlay()
-                path.coords = arrayListOf(
+
+                // PathOverlay() 선 긋는 객체 생성 => 지도에 클릭될때 마다 새로 생성됨 => 선도 하나씩 새로 그어짐.
+//                val path = PathOverlay()
+
+                // mPath 변수가 null 상태라면? 새 객체 만들어서 채워줌.
+                if (mPath == null){
+                    mPath = PathOverlay()
+                }
+
+                mPath!!.coords = arrayListOf(
                     startingPoint,
                     latLng
                 )
 
-                path.map = naverMap
+                mPath!!.map = naverMap
 
 
 
